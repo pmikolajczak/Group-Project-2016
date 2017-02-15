@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class CheckBoxesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public CheckBox checkBox;
         private CheckboxItemBinding binding;
 
         public MyViewHolder(CheckboxItemBinding binding) {

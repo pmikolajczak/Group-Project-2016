@@ -22,13 +22,12 @@ public class SkladnikiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_skladniki);
-        skladnikiViewModel = new SkladnikiViewModel(this, binding);
-        binding.setViewModel(skladnikiViewModel);
-
         Intent intent = getIntent();
         lat = intent.getStringExtra("lat");
         lon = intent.getStringExtra("lon");
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_skladniki);
+        skladnikiViewModel = new SkladnikiViewModel(this, binding, lat, lon);
+        binding.setViewModel(skladnikiViewModel);
     }
 }

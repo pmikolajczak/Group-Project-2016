@@ -1,5 +1,8 @@
 package projekt.pizzaby.api;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,9 +11,16 @@ import java.util.List;
 
 public class Ingredient {
 
-
+    @SerializedName("IngredientID")
+    @Expose
     private Integer ingredientID;
+
+    @SerializedName("Name")
+    @Expose
     private String name;
+
+    @SerializedName("Pizzas")
+    @Expose
     private List<PizzaMapped> pizzas = null;
 
     public Integer getIngredientID() {
