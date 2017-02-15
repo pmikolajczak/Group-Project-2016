@@ -70,7 +70,7 @@ public class SkladnikiViewModel extends BaseViewModel {
             }
         }
 
-        apiPizzeriaResponseObservable = api.getData(skladniki, 54.38, 18.61, minSize, maxSize); // 54.38, 18.61
+        apiPizzeriaResponseObservable = api.getData(skladniki, lat, lon, minSize, maxSize); // 54.38, 18.61
         apiPizzeriaResponseObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
