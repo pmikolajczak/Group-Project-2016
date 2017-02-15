@@ -2,6 +2,7 @@ package projekt.pizzaby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class SkladnikiViewModel extends BaseViewModel {
     public ActivitySkladnikiBinding binding;
     public Double lat;
     public Double lon;
+    public Integer minSize = 1;
+    public Integer maxSize = 100;
 
     public SkladnikiViewModel(Context context, ActivitySkladnikiBinding binding,
                               String lat, String lon) {
@@ -52,6 +55,11 @@ public class SkladnikiViewModel extends BaseViewModel {
         binding.recycler.setAdapter(checkBoxesAdapter);
     }
 
+    public void updateMinMax(String min, String max){
+        minSize = Integer.valueOf(min);
+        maxSize = Integer.valueOf(max);
+    }
+
     public void onFabClick() {
         Map<String, String> skladniki = new HashMap<>();
         int j = 0;
@@ -62,7 +70,7 @@ public class SkladnikiViewModel extends BaseViewModel {
             }
         }
 
-        apiPizzeriaResponseObservable = api.getData(skladniki, lat, lon, 2, 100);
+        apiPizzeriaResponseObservable = api.getData(skladniki, 54.38, 18.61, minSize, maxSize); // 54.38, 18.61
         apiPizzeriaResponseObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,5 +82,10 @@ public class SkladnikiViewModel extends BaseViewModel {
                         throwable -> {
                             Toast.makeText(context, "błąd", Toast.LENGTH_SHORT).show();
                         });
+    }
+
+    public void settings(){
+        Intent intent = new Intent("settings");
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 }
