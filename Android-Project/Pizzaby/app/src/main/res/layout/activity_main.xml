@@ -18,41 +18,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp"
+            android:layout_gravity="center"
             android:layout_marginEnd="16dp"
-            android:layout_gravity="center">
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="Aplikacja wymaga Twojej lokalizacji"
-                android:layout_marginBottom="16dp"/>
+                android:text="Aplikacja wymaga Twojej lokalizacji" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text='@{viewModel.gotLocationAlready ? "Lokalizacja jest dostępna" : "Wyszukiwanie..."}'
-                android:layout_marginBottom="16dp"/>
+                android:text='@{viewModel.gotLocationAlready ? "Lokalizacja jest dostępna" : "Wyszukiwanie..."}' />
 
             <Button
-                android:text='@{viewModel.gotLocationAlready ? "Przejdź do aplikacji" : "Oczekiwanie na lokalizację"}'
+                android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
                 android:enabled="@{viewModel.gotLocationAlready ? true : false}"
-                />
+                android:onClick="@{v -> viewModel.buttonAction()}"
+                android:text='@{viewModel.gotLocationAlready ? "Przejdź do aplikacji" : "Oczekiwanie na lokalizację"}' />
 
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:visibility="@{viewModel.gotLocationAlready ? View.INVISIBLE : View.VISIBLE}"/>
+                android:visibility="@{viewModel.gotLocationAlready ? View.INVISIBLE : View.VISIBLE}" />
 
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -63,19 +62,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="Lokalizacja:"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Lokalizacja:" />
 
             <TextView
-                android:text="@{viewModel.latText}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.latText}" />
 
             <TextView
-                android:text="@{viewModel.lonText}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.lonText}" />
 
         </LinearLayout>
 

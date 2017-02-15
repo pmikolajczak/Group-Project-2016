@@ -9,17 +9,24 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1." + String.valueOf(versionCode)
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "boolean", "OMIT_HTTPS_SECURITY", "true"
         buildConfigField "String", "HTTP_PROXY_INET", "null"
         buildConfigField "int", "HTTP_PROXY_PORT", "0"
-        buildConfigField "String", "BASE_URL", "\"http://am-api.alpha.airmatrix.dev.speednet.pl/api/\""
+        buildConfigField "String", "BASE_URL", "\"http://pizzabyapi.azurewebsites.net/\""
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            buildConfigField "String", "HTTP_PROXY_INET", properties.getProperty('proxy.inet', 'null')
+            buildConfigField "int", "HTTP_PROXY_PORT", properties.getProperty('proxy.port', '0')
+            buildConfigField "boolean", "OMIT_HTTPS_SECURITY", "true"
         }
     }
     dataBinding {
