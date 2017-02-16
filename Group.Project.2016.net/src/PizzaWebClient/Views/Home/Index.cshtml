@@ -26,7 +26,8 @@
             <div class="row">
                 <div id="checkboxed" data-bind="foreach: ingredients">
                     <div class="row text-center">
-                        <label class="jumbotron">
+                        <div class="col-md-1"></div>
+                        <label class="jumbotron col-md-2">
                             <input class="" type="checkbox" data-bind="value: Name, checked: $parent.ingredientsSelected">
                             <span data-bind="text: Name"></span>
                         </label>
