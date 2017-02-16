@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Szukaj Pizzy";
+}
+
+<environment names="Development,Staging,Production">
+    <script src="~/js/home.js"></script>
+</environment>
+
+<div>
+    <h3 id="locationDisabled" class="text-center hidden">
+        Należy zezwolić na lokalizację
+    </h3>
+    <h3 id="locationWaiting" class="text-center">
+        Oczekiwanie na lokalizację...
+    </h3>
+
+    <div id="content" class="hidden">
+        <form id="pizzeriasForm" action="@Url.Action("Pizzerias", "Pizzerias")">
+            <h3 class="text-center">
+                Wybierz składniki
+            </h3>
+            <div class="text-center">
+                Twoje współrzędne: <span data-bind="text: latitude"></span>, <span data-bind="text: longitude"></span>
+            </div>
+            <br />
+            <div class="row">
+                <div id="checkboxed" data-bind="foreach: ingredients">
+                    <div class="row text-center">
+                        <label class="jumbotron">
+                            <input class="" type="checkbox" data-bind="value: Name, checked: $parent.ingredientsSelected">
+                            <span data-bind="text: Name"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <span class="col-md-4">Minimalny rozmiar pizzy:</span>
+                <input class="col-md-8" data-bind="value: minSize" min="0" max="100" type="number" />
+            </div><br />
+            <div class="row">
+                <span class="col-md-4">Maksymalny rozmiar pizzy:</span>
+                <input class="col-md-8" data-bind="value: maxSize" min="0" max="100" type="number" />
+            </div><br />
+
+            <div class="row text-center">
+                <button id="submitButton" type="submit" class="btn btn-default">Znajdź pizze</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var pizzeriasUrl = '@Url.Action("PizzeriasList", "PizzeriasController")';
+</script>

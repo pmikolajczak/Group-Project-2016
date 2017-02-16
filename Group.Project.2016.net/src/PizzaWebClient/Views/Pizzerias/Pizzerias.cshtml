@@ -1,0 +1,57 @@
+﻿@model ICollection<PizzaWebClient.Models.PizzeriasResponse>
+
+<environment names="Development,Staging,Production">
+    <script src="~/js/pizzerias.js"></script>
+</environment>
+
+<h3 class="text-center">
+    Pizzerie, w których znajdziesz swoją wymarzoną pizzę
+</h3>
+<hr />
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">@item.Name</h3>
+        </div>
+        <div class="panel-body">
+            <p>Adres: @item.Address</p>
+            <p>Odległość: @item.Distance.ToString("0.00") km</p>
+            <p>Telefon: @item.Phone</p>
+            <p>Ceny od: @item.PriceMin zł</p>
+        </div>
+
+        <button type="button" class="btn margin-bottom-2" data-toggle="modal" data-target="@("#Pizzeria" + item.PizzeriaID)">Kliknij aby zobaczyć pizze</button>
+        <div id="@("Pizzeria" + item.PizzeriaID)" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@item.Name</h4>
+                        <h5>@item.Phone</h5>
+                    </div>
+                    <div class="modal-body">
+                        @foreach(var pizza in item.Pizzas)
+                        {
+                            <div class="jumbotron">
+                                <div class="container">
+                                    <h3>@pizza.Name</h3>
+                                    <p class="smaller">Cena: @pizza.Price</p>
+                                    <p class="smaller">Średnica: @pizza.Size</p>
+                                    <p class="smaller">Cena: @pizza.Price</p>
+                                    <p class="smaller">Składniki: @string.Join(", ", pizza.Ingredients.Select(p => p.Name))</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
